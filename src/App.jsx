@@ -13,6 +13,16 @@ export default function App() {
     }
   }
 
+  const manageEdit = (worker) => {
+    setHiredPeople(onPayroll => {
+      if(worker.wage > 0) {
+        return onPayroll.map(person => person.email === worker.email ? {...person, wage: worker.wage} : person)
+      } else {
+        return onPayroll.filter(person => person.email !== worker.email)
+      }
+    })
+  }
+
   return (
     <>
       <header>
@@ -26,7 +36,7 @@ export default function App() {
       <Routes>
         <Route path='/' element={<Dashboard hiredPeople={hiredPeople}/>}/>
         <Route path="/view/:id" element={<PersonProfile onSelection={manageHire} hired={false}/>}/>
-        {/* <Route path="/edit/:id" element={<PersonProfile onSelection={handleEdit} hired={true}/>}/> */}
+        <Route path="/edit/:id" element={<PersonProfile onSelection={manageEdit} hired={true}/>}/>
       </Routes>
     </>
   )

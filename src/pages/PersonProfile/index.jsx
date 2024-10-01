@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react'
 import HireForm from './components/HireForm'
 import { useParams, useNavigate, useLocation } from 'react-router-dom'
+import EditForm from './components/EditForm'
 
+// eslint-disable-next-line react/prop-types
 function PersonProfile({onSelection, hired}) {
   const [person, setPerson] = useState(null)
   const {id}=useParams()
@@ -25,14 +27,14 @@ function PersonProfile({onSelection, hired}) {
         <h2>
           {person.name.first} {person.name.last}
         </h2>
-        {/*edit form here later*/}
+        <EditForm person={person} onEdit={manageSelection}/>
       </article>
     ) : (
       <article>
       <h2>
         {person.name.first} {person.name.last}
       </h2>
-      <HireForm className = 'form' person={person} onHire={manageSelection}/>
+      <HireForm  person={person} onHire={manageSelection}/>
     </article>
     )}
     </>
